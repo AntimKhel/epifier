@@ -2,4 +2,5 @@
     <string name="app_name">epifier</string>
     <string name="register_header">First of the few steps to set you up with a Bank Account</string>
     <string name="register_pan_header">PAN NUMBER</string>
+    <string name="register_birth_header">BIRTHDATE</string>
 </resources>
