@@ -92,17 +92,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dayInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/blue"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/birth">
+            android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:inputType="number"
@@ -113,18 +110,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/monthInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/blue"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/birth">
+            android:layout_marginStart="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:inputType="number"
@@ -135,21 +129,18 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/yearInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/black"
             android:layout_marginStart="8dp"
-            app:boxStrokeColor="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/birth">
+            app:boxStrokeColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:inputType="number"
-                android:maxLength="2" />
+                android:maxLength="4" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
