@@ -4,4 +4,5 @@
     <string name="register_pan_header">PAN NUMBER</string>
     <string name="register_birth_header">BIRTHDATE</string>
     <string name="register_no_pan">I don\'t have a PAN</string>
+    <string name="register_button_next">NEXT</string>
 </resources>
