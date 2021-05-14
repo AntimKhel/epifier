@@ -2,6 +2,7 @@ package com.example.epifier.view
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +12,6 @@ import com.example.epifier.extention.hideKeyboard
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -59,9 +59,15 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.emitYear(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
                     currentFocus?.hideKeyboard()
-                    button.requestFocus()
                 }
             }
+        }
+        button.setOnClickListener {
+            Toast.makeText(baseContext, "Details submitted successfully", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        noPan.setOnClickListener {
+            finish()
         }
     }
 
