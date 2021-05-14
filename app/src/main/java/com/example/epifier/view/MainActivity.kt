@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epifier.R
 import com.example.epifier.databinding.ActivityMainBinding
-import com.example.epifier.extention.addUrlHandler
-import com.example.epifier.extention.afterTextChanged
-import com.example.epifier.extention.hideKeyboard
-import com.example.epifier.extention.toSpannable
+import com.example.epifier.extention.*
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -70,8 +67,37 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.button.setOnClickListener {
-            Toast.makeText(baseContext, "Details submitted successfully", Toast.LENGTH_SHORT).show()
-            finish()
+            mainViewModel.mockApiCall().observe(this, {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            Toast.makeText(
+                                baseContext,
+                                "Details submitted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(
+                                baseContext,
+                                "Error occurred. Please try again",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                        Status.LOADING -> {
+                            Toast.makeText(
+                                baseContext,
+                                "Please wait...",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }
+                }
+            })
+
         }
         binding.noPan.setOnClickListener {
             finish()

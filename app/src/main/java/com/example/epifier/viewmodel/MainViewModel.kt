@@ -1,7 +1,11 @@
 package com.example.epifier.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import com.example.epifier.extention.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -18,6 +22,16 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _day = MutableStateFlow("")
     private val _month = MutableStateFlow("")
     private val _year = MutableStateFlow("")
+
+    fun mockApiCall() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            delay(2000)
+            emit(Resource.success(data = null))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
 
     fun emitPan(pan: String) {
         _pan.value = pan
