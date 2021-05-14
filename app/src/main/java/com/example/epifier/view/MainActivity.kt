@@ -1,5 +1,7 @@
 package com.example.epifier.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.widget.Toast
@@ -7,8 +9,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epifier.R
+import com.example.epifier.extention.addUrlHandler
 import com.example.epifier.extention.afterTextChanged
 import com.example.epifier.extention.hideKeyboard
+import com.example.epifier.extention.toSpannable
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initListeners()
         initObserver()
+        initSpannable()
     }
 
     private fun initListeners() {
@@ -77,6 +82,17 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.isButtonEnabled.collect { value ->
                 button.isEnabled = value
             }
+        }
+    }
+
+    private fun initSpannable() {
+        baseContext.getString(R.string.register_disclaimer).toSpannable().addUrlHandler( {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(it)
+                baseContext.startActivity(this)
+            }
+        }, resources.getColor(R.color.button_purple, null)).let {
+            disclaimer.text = it
         }
     }
 }

@@ -5,5 +5,5 @@
     <string name="register_birth_header">BIRTHDATE</string>
     <string name="register_no_pan">I don\'t have a PAN</string>
     <string name="register_button_next">NEXT</string>
-    <string name="register_disclaimer">Providing PAN and Date of Birth helps us find and fetch your KYC from a central registry by the Government of India. <a href='https://stackoverflow.com/'>Learn more</a></string>
+    <string name="register_disclaimer"><![CDATA[Providing PAN and Date of Birth helps us find and fetch your KYC from a central registry by the Government of India. <a href=\"https://stackoverflow.com\">Learn more</a>]]></string>
 </resources>
