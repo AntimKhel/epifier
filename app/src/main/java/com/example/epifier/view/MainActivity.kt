@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
+                            binding.frameLayout.visibility = View.GONE
                             Toast.makeText(
                                 baseContext,
                                 "Details submitted successfully",
@@ -87,12 +89,7 @@ class MainActivity : AppCompatActivity() {
 
                         }
                         Status.LOADING -> {
-                            Toast.makeText(
-                                baseContext,
-                                "Please wait...",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
+                            binding.frameLayout.visibility = View.VISIBLE
                         }
                     }
                 }
