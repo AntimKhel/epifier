@@ -4,27 +4,35 @@ import android.os.Bundle
 import android.text.InputFilter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.epifier.R
 import com.example.epifier.extention.afterTextChanged
 import com.example.epifier.extention.hideKeyboard
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initListeners()
+        initObserver()
     }
 
     private fun initListeners() {
         panEditText.apply {
             afterTextChanged {
+                mainViewModel.emitPan(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
                     dayEditText.requestFocus()
                 }
@@ -32,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
         dayEditText.apply {
             afterTextChanged {
+                mainViewModel.emitDay(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
                     monthEditText.requestFocus()
                 }
@@ -39,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
         monthEditText.apply {
             afterTextChanged {
+                mainViewModel.emitMonth(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
                     yearEditText.requestFocus()
                 }
@@ -46,10 +56,20 @@ class MainActivity : AppCompatActivity() {
         }
         yearEditText.apply {
             afterTextChanged {
+                mainViewModel.emitYear(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
                     currentFocus?.hideKeyboard()
                     button.requestFocus()
                 }
+            }
+        }
+    }
+
+    @InternalCoroutinesApi
+    private fun initObserver() {
+        lifecycleScope.launch {
+            mainViewModel.isButtonEnabled.collect { value ->
+                button.isEnabled = value
             }
         }
     }
