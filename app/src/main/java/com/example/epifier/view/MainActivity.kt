@@ -9,57 +9,59 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epifier.R
+import com.example.epifier.databinding.ActivityMainBinding
 import com.example.epifier.extention.addUrlHandler
 import com.example.epifier.extention.afterTextChanged
 import com.example.epifier.extention.hideKeyboard
 import com.example.epifier.extention.toSpannable
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
 
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         initListeners()
         initObserver()
         initSpannable()
     }
 
     private fun initListeners() {
-        panEditText.apply {
+        binding.panEditText.apply {
             afterTextChanged {
                 mainViewModel.emitPan(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
-                    dayEditText.requestFocus()
+                    binding.dayEditText.requestFocus()
                 }
             }
         }
-        dayEditText.apply {
+        binding.dayEditText.apply {
             afterTextChanged {
                 mainViewModel.emitDay(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
-                    monthEditText.requestFocus()
+                    binding.monthEditText.requestFocus()
                 }
             }
         }
-        monthEditText.apply {
+        binding.monthEditText.apply {
             afterTextChanged {
                 mainViewModel.emitMonth(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
-                    yearEditText.requestFocus()
+                    binding.yearEditText.requestFocus()
                 }
             }
         }
-        yearEditText.apply {
+        binding.yearEditText.apply {
             afterTextChanged {
                 mainViewModel.emitYear(it)
                 if (it.length == (filters.first() as? InputFilter.LengthFilter)?.max) {
@@ -67,11 +69,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        button.setOnClickListener {
+        binding.button.setOnClickListener {
             Toast.makeText(baseContext, "Details submitted successfully", Toast.LENGTH_SHORT).show()
             finish()
         }
-        noPan.setOnClickListener {
+        binding.noPan.setOnClickListener {
             finish()
         }
     }
@@ -80,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObserver() {
         lifecycleScope.launch {
             mainViewModel.isButtonEnabled.collect { value ->
-                button.isEnabled = value
+                binding.button.isEnabled = value
             }
         }
     }
@@ -92,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 baseContext.startActivity(this)
             }
         }, resources.getColor(R.color.button_purple, null)).let {
-            disclaimer.text = it
+            binding.disclaimer.text = it
         }
     }
 }
