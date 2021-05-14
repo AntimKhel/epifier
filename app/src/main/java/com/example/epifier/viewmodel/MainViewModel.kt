@@ -2,7 +2,6 @@ package com.example.epifier.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -33,6 +32,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     }
 
     val isButtonEnabled: Flow<Boolean> = combine(_pan, _day, _month, _year) { pan, day, month, year ->
-        return@combine true
+        val regex = "[A-Z]{5}[0-9]{4}[A-Z]".toRegex()
+        return@combine regex.containsMatchIn(pan)
     }
 }
