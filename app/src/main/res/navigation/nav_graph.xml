@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/detailFragment">
+
+    <dialog
+        android:id="@+id/thanksDialogFragment"
+        android:name="com.example.epifier.ThanksDialogFragment"
+        android:label="fragment_thanks_dialog_list_dialog"
+        tools:layout="@layout/fragment_thanks_dialog_list_dialog" >
+        <action
+            android:id="@+id/action_thanksDialogFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.epifier.view.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_thanksDialogFragment"
+            app:destination="@id/thanksDialogFragment" />
+    </fragment>
+</navigation>
