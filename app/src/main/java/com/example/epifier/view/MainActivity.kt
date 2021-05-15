@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.epifier.R
 import com.example.epifier.databinding.ActivityMainBinding
 import com.example.epifier.extention.*
+import com.example.epifier.repository.model.Detail
 import com.example.epifier.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
+    private lateinit var detail: Detail
 
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.button.setOnClickListener {
-            mainViewModel.mockApiCall().observe(this, {
+            mainViewModel.mockApiCall(detail).observe(this, {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
@@ -81,9 +83,10 @@ class MainActivity : AppCompatActivity() {
 
                         }
                         Status.ERROR -> {
+                            binding.frameLayout.visibility = View.GONE
                             Toast.makeText(
                                 baseContext,
-                                "Error occurred. Please try again",
+                                "PAN Data already exists",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -106,6 +109,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             mainViewModel.isButtonEnabled.collect { value ->
                 binding.button.isEnabled = value
+                createDetail(value)
             }
         }
     }
@@ -118,6 +122,16 @@ class MainActivity : AppCompatActivity() {
             }
         }, resources.getColor(R.color.button_purple, null)).let {
             binding.disclaimer.text = it
+        }
+    }
+
+    private fun createDetail(isValid: Boolean) {
+        with(binding) {
+            if (isValid)
+                detail = Detail(
+                    pan = panEditText.text.toString(),
+                    yob = yearEditText.text.toString().toInt()
+                )
         }
     }
 }

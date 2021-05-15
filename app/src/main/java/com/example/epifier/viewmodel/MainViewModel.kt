@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.epifier.extention.Resource
 import com.example.epifier.repository.local.DetailRepository
+import com.example.epifier.repository.model.Detail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -26,10 +26,10 @@ class MainViewModel @Inject constructor(
     private val _month = MutableStateFlow("")
     private val _year = MutableStateFlow("")
 
-    fun mockApiCall() = liveData(Dispatchers.IO) {
+    fun mockApiCall(detail: Detail) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            delay(2000)
+            detailRepository.saveDetail(detail)
             emit(Resource.success(data = null))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
