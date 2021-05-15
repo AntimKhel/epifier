@@ -7,7 +7,7 @@
 
     <dialog
         android:id="@+id/thanksDialogFragment"
-        android:name="com.example.epifier.ThanksDialogFragment"
+        android:name="com.example.epifier.view.ThanksDialogFragment"
         android:label="fragment_thanks_dialog_list_dialog"
         tools:layout="@layout/fragment_thanks_dialog" />
     <fragment

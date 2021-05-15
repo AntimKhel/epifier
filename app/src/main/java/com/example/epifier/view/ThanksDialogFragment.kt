@@ -1,9 +1,10 @@
-package com.example.epifier
+package com.example.epifier.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.epifier.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ThanksDialogFragment : BottomSheetDialogFragment() {
