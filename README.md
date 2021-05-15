@@ -9,6 +9,7 @@ This is a clean architecture app example built with
 - Cache Strategy (Repository Pattern)
 - Coroutines Flow
 - ViewBinding
+- Navigation Component
 
 # Architecture
 

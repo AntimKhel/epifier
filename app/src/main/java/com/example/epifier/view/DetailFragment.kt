@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.epifier.R
 import com.example.epifier.databinding.FragmentDetailBinding
 import com.example.epifier.extention.*
@@ -109,7 +110,7 @@ class DetailFragment : Fragment() {
 
         }
         binding.noPan.setOnClickListener {
-            activity?.finish()
+            it.findNavController().navigate(R.id.action_detailFragment_to_thanksDialogFragment)
         }
     }
 

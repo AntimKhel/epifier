@@ -12,6 +12,6 @@ class ThanksDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_thanks_dialog_list_dialog, container, false)
+        return inflater.inflate(R.layout.fragment_thanks_dialog, container, false)
     }
 }

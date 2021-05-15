@@ -9,11 +9,7 @@
         android:id="@+id/thanksDialogFragment"
         android:name="com.example.epifier.ThanksDialogFragment"
         android:label="fragment_thanks_dialog_list_dialog"
-        tools:layout="@layout/fragment_thanks_dialog_list_dialog" >
-        <action
-            android:id="@+id/action_thanksDialogFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
-    </dialog>
+        tools:layout="@layout/fragment_thanks_dialog" />
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.epifier.view.DetailFragment"
