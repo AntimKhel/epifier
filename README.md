@@ -10,6 +10,7 @@ This is a clean architecture app example built with
 - Coroutines Flow
 - ViewBinding
 - Navigation Component
+- Work Manager
 
 # Architecture
 
