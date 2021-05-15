@@ -3,6 +3,7 @@ package com.example.epifier.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.epifier.extention.Resource
+import com.example.epifier.repository.local.DetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,7 +17,9 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val detailRepository: DetailRepository
+) : ViewModel() {
 
     private val _pan = MutableStateFlow("")
     private val _day = MutableStateFlow("")
