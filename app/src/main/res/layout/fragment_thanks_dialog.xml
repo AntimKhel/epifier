@@ -20,7 +20,7 @@
         android:contentDescription="@string/onboard_icon_cd" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/onboardButton"
         style="@style/Widget.MaterialComponents.Button"
         app:cornerRadius="8dp"
         android:enabled="true"
