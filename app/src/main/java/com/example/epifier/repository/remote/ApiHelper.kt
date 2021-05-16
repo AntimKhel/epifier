@@ -1,7 +1,7 @@
 package com.example.epifier.repository.remote
 
-import retrofit2.Response
+import kotlinx.coroutines.flow.Flow
 
 interface ApiHelper {
-    suspend fun getNothing(): Response<Nothing>
+    suspend fun getNothing(): Flow<String>
 }

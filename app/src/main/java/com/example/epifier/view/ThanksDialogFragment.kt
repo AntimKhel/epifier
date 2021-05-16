@@ -31,6 +31,7 @@ class ThanksDialogFragment : BottomSheetDialogFragment() {
                 { workInfo ->
                     when (workInfo.state) {
                         WorkInfo.State.SUCCEEDED -> { Toast.makeText(context, "We will contact you.", Toast.LENGTH_LONG).show()}
+                        WorkInfo.State.FAILED -> { Toast.makeText(context, "Something went wrong. Please try again", Toast.LENGTH_LONG).show()}
                         else -> {}
                     }
                 })
